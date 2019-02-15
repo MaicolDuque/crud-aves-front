@@ -1,0 +1,92 @@
+<div class="container" style="margin-top: 6%;">
+
+
+    <div class="row">
+        <!-- Modal -->
+        <div class="modal fade" id="modalAddEditAve" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{{addEdit}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group" *ngIf="controlEdit">
+                            <label for="exampleFormControlInput1">CD Ave: </label>
+                            <input [(ngModel)]="ave.cdAve" type="text" class="form-control" id="cdAve" placeholder="">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Nombre común: </label>
+                            <input [(ngModel)]="ave.nombreComun" type="text" class="form-control" id="nombreComun" placeholder="">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Nombre científico: </label>
+                            <input [(ngModel)]="ave.nombreCientifico" type="text" class="form-control" id="nombreCientifico" placeholder="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-secondary" >Close</button> -->
+                        <button (click)="agregarGuardar()" type="button" data-dismiss="modal" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin modal ave -->
+
+        <div class="form-inline col-md-12 mb-5">
+
+            <div class="form-group">
+                <label for="nombreAve">Nombre:</label>
+                <input [(ngModel)]="search.nombre" type="text" id="nombreAve" class="form-control mx-sm-3">
+            </div>
+            <div class="form-group">
+                <label for="zonaBuscar">Zona</label>
+                <select [(ngModel)]="search.zona" class="form-control mx-sm-3 " id="zonaBuscar">
+                    <option  value="all">Todas las zonas</option>
+                    <option *ngFor="let zona of allZonas" value="{{zona.cdZona}}">{{zona.nombre}}</option>                    
+                </select>
+            </div>
+            <div class="form-group">
+                <button (click)="searchAve()" style="width:60px; font-size: 1.3em" title="Buscar">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div style="width:100%;">
+                <button (click)="onAddAve()" data-toggle="modal" data-target="#modalAddEditAve" type="button" class="btn btn-primary" style="float:right">
+                        <i class="fas fa-plus"></i> Agregar
+                </button>
+            </div>
+        </div>
+
+
+        <div class="col-md-12 ">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre Común</th>
+                        <th>Nombre Científico</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ave of allAves">
+                        <td>{{ave.cdAve}}</td>
+                        <td>{{ave.nombreComun}}</td>
+                        <td>{{ave.nombreCientifico}}</td>
+                        <td class="text-center">
+                            <i (click)="onEditAve(ave.cdAve)" class="fas fa-edit" data-toggle="modal" data-target="#modalAddEditAve" style="font-size: 1.2em; margin:0 10px; cursor: pointer;color:cornflowerblue"></i>
+                            <i (click)="deleteAve(ave.cdAve)" class="fas fa-trash-alt" style="font-size: 1.2em;cursor: pointer;color:red"></i>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
